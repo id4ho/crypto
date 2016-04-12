@@ -41,7 +41,7 @@ a set, V. `X: U -> V`
 We say that this set V is where the random variable, X, takes it's values.
 
 More generally we say that a random variable X induces a distribution on V:
-Pr[X=v] := Pr[X<sup>-1</sup>(v)] 
+Pr[X=v] := Pr[X<sup>-1</sup>(v)]
 The probability that a random sample from the universe will fall into the
 preimage of `v` (i.e. map to `v` through `X`) is the same as the probability that a
 random sample of `V` will be `v`.
