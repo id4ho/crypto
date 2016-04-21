@@ -54,3 +54,31 @@ __examples:__
 `epsilon(l) = 1/2^l` (this is because for any constant, `d`, there is
 sufficiently large `l` such that `1/2^l < 1/l^d`) This is exponentially small.
 
+#### What does it mean to be indistinguishable from random?
+
+##### Statistical Tests
+An algorithm, A, s.t. A(x) outputs "0" if not random and "1" if random
+Examples:
+1. A(x) = 1 iff |#0(x) - #1(x)| <= 10 * sqrt(n)
+2. A(x) = 1 iff |#00(x) - n/4| <= 10 * sqrt(n)
+3. A(x) = 1 iff longest-run-of-0(x) <= 10 * log<sub>2</sub>(n)
+
+In the old days, you'd take a lot of these statisticals tests and say that the
+generator is random if they all return 1.
+
+##### Advantage
+Adv<sub>PRG</sub> [A, G] := |Pr[A(G(k)) = 1] - Pr[A(r) =1]|
+Adv close to 1 => A can distinguish G from random
+Adv close to 0 => A cannot distinguish G from random
+
+##### Crypto definition of a secure PRG
+For any efficient statistical test, A, Adv<sub>PRG</sub>[A, G] is "negligible".
+Are there provably secure PRGs? Unknown.. if you could prove there was one, you
+would prove P!=NP. Or if you could prove that P=NP we would know that there are
+NO provable secure PRGs.
+
+Yao (1982) an unpredictable PRG is secure. Vice versa: if a PRG is insecure, it
+is predictable.
+
+
+
