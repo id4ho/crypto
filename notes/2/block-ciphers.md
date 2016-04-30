@@ -34,6 +34,17 @@ S<sub>F</sub> is the set of functions that map X to Y when the key is chosen
 from the valid pool, K, then a PRF is secure if a random function in Funs[X,Y]
 is indistinguishable from a random function in S<sub>F</sub>.
 
+Define two experiments, b=0 and b=1, in one the challenger choses a truly random
+function and in the other the challenger choses a k from K and then a function
+from S<sub>F</sub>. The adversary is then able to query the challenger with
+inputs and get the outputs from the function and ultimately will output 1 if the
+adversary thinks the function is truly random and 0 if he thinks it's not. The
+advantage of the adversary is the difference between the probability that the
+advs. outputs 1 and the prob. that he outputs 0.
+
+##### PRF switching Lemma
+Any secure PRP is also a secure PRF if |X| is sufficiently large.
+
 ##### An easy application for PRFs
 Making a PRG
 Let F: K * {0,1}<sup>n</sup> -> {0,1}<sup>n</sup> be a secure PRF.
@@ -101,3 +112,15 @@ The makers of DES specified strict rules for the choice of S boxes:
 - no output bit should be close to a linear func. of the input bits
 - S-boxes are 4-to-1 maps (every output has exactly 4 preimages)
 - .. etc.
+
+##### Modes of operation
+ECB (electronic code book) is basically taking the entire message and breaking
+it into code blocks which would then be fed into the block cipher. This is not
+semantically secure because if two of the blocks are the same you run into a
+two-time-pad problem.
+
+**Deterministic Counter Mode**
+One simple way to achieve semantic security with a block cipher is to
+essentially convert it to a stream cipher.. i.e. run the PRF (PRP?) for however
+many blocks of input you have but instead of feeding it the message, you feed it
+the index of the block and then xor the entire thing with the message.
